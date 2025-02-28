@@ -435,16 +435,17 @@ body {
 }
 
 .about-emoji {
-  font-size: 2rem;
+  font-size: 2.2rem;
   flex-shrink: 0;
-  margin-top: 0.2rem;
+  margin-top: 0rem;
 }
 
 .about-text {
   flex: 1;
   font-size: 1.1rem;
+  margin-left: 1rem;
   position: relative;
-  padding-left: 0.5rem;
+  padding-left: 1.5rem;
 }
 
 .about-text::before {

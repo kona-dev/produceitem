@@ -226,26 +226,24 @@ export default function Home() {
           <div className="section-content about-section">
             <h1 className="title">about us</h1>
             <div className="about-content">
-              <p>
+              <div className="about-item">
                 <span className="about-emoji">🌱</span>
                 <span className="about-text">
-                  
+                  produce item - a couple of devs making fresh projects.
                 </span>
-              </p>
-              <p>
+              </div>
+              <div className="about-item">
                 <span className="about-emoji">🌿</span>
                 <span className="about-text">
-                  Founded in 2023, we work with clients who share our passion for sustainable design 
-                  and innovative technology solutions.
+                  founded in 2025 -  we want to start off running, deploying fun apps for all users. 
                 </span>
-              </p>
-              <p>
+              </div>
+              <div className="about-item">
                 <span className="about-emoji">🌞</span>
                 <span className="about-text">
-                  Our team brings together diverse talents and perspectives, 
-                  creating a rich environment where creativity flourishes.
+                   driven off of fun - creating apps that inspire and entertain.
                 </span>
-              </p>
+              </div>
             </div>
           </div>
         );
@@ -304,7 +302,7 @@ export default function Home() {
       
       {/* Footer */}
       <footer className="footer">
-        <p>© 2023 produceitem - all rights reserved</p>
+        <p>© 2025 produceitem - all rights reserved</p>
       </footer>
     </div>
   );

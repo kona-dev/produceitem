@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
+import Link from 'next/link';
 
 export default function Home() {
   const [isHovering, setIsHovering] = useState(false);
@@ -20,7 +21,7 @@ export default function Home() {
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * produceEmojis.length);
     setRandomEmoji(produceEmojis[randomIndex]);
-  }, []);
+  }, [produceEmojis]);
   
   // Function to get a new random emoji different from the current one
   const getNewRandomEmoji = () => {
@@ -213,7 +214,7 @@ export default function Home() {
                   <span className="project-title-main">feetdle</span>
                   <span className="project-title-domain-gold">.xyz</span>
                 </h3>
-                <p>we aren't freaks, <br/> but we satisfied the people who are. <br/> <span className="yellow-gradient-text">(coming soon)</span></p>
+                <p>we aren&apos;t freaks, <br/> but we satisfied the people who are. <br/> <span className="yellow-gradient-text">(coming soon)</span></p>
               </div>
             </div>
           </div>
@@ -264,31 +265,31 @@ export default function Home() {
         <nav>
           <ul className="navList">
             <li>
-              <a 
+              <Link 
                 href="/" 
                 className={activeSection === 'home' ? 'active' : ''}
                 onClick={(e) => handleNavClick('home', e)}
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a 
+              <Link 
                 href="/projects" 
                 className={activeSection === 'projects' ? 'active' : ''}
                 onClick={(e) => handleNavClick('projects', e)}
               >
                 Projects
-              </a>
+              </Link>
             </li>
             <li>
-              <a 
+              <Link 
                 href="/about" 
                 className={activeSection === 'about' ? 'active' : ''}
                 onClick={(e) => handleNavClick('about', e)}
               >
                 About
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

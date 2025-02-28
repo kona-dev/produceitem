@@ -64,17 +64,17 @@ export default function Home() {
   };
   
   const handleTwitterClick = (url: string) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(url, '_blank', 'noopener noreferrer');
   };
   
   const handleProjectClick = (url: string) => {
     if (url) {
-      window.open(url, '_blank', 'noopener,noreferrer');
+      window.open(url, '_blank', 'noopener noreferrer');
     }
   };
   
   // Handle navigation
-  const handleNavClick = (section: string, e: React.MouseEvent) => {
+  const handleNavClick = (section: string, e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setActiveSection(section);
   };
@@ -159,6 +159,14 @@ export default function Home() {
                 className="project-card" 
                 onClick={() => handleProjectClick('')}
                 style={{ cursor: 'pointer' }}
+                role="button"
+                tabIndex={0}
+                aria-label="Flexify project (coming soon)"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleProjectClick('');
+                  }
+                }}
               >
                 <div className="project-emoji">💪</div>
                 <h3>
@@ -171,6 +179,14 @@ export default function Home() {
                 className="project-card"
                 onClick={() => handleProjectClick('')}
                 style={{ cursor: 'pointer' }}
+                role="button"
+                tabIndex={0}
+                aria-label="JuiceMe project (coming soon)"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleProjectClick('');
+                  }
+                }}
               >
                 <div className="project-emoji">🧃</div>
                 <h3>
@@ -183,6 +199,14 @@ export default function Home() {
                 className="project-card"
                 onClick={() => handleProjectClick('https://feetdle.xyz')}
                 style={{ cursor: 'pointer' }}
+                role="button"
+                tabIndex={0}
+                aria-label="Feetdle project"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleProjectClick('https://feetdle.xyz');
+                  }
+                }}
               >
                 <div className="project-emoji">🦶</div>
                 <h3>

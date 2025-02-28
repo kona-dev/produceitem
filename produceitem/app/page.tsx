@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import Link from 'next/link';
 
 export default function Home() {
@@ -10,19 +10,18 @@ export default function Home() {
   const [randomEmoji, setRandomEmoji] = useState("");
   const [isChangingEmoji, setIsChangingEmoji] = useState(false);
   
-  // List of fruit and vegetable emojis
-  const produceEmojis = [
+  // List of fruit and vegetable emojis - memoized to prevent recreation on each render
+  const produceEmojis = useMemo(() => [
     "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", 
     "🍒", "🍑", "🥭", "🍍", "🥥", "🥝", "🍅", "🥑", "🥦", "🥬", 
     "🥒", "🌶️", "🌽", "🥕", "🧅", "🥔", "🍠", "🍆"
-  ];
+  ], []);
   
   // Select a random emoji on component mount
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * produceEmojis.length);
     setRandomEmoji(produceEmojis[randomIndex]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [produceEmojis]); // Now it's safe to include produceEmojis in the dependency array
   
   // Function to get a new random emoji different from the current one
   const getNewRandomEmoji = () => {

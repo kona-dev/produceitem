@@ -424,6 +424,8 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .about-content p {
@@ -444,8 +446,26 @@ body {
   flex: 1;
   font-size: 1.1rem;
   margin-left: 1rem;
+  margin-top: 1rem;
   position: relative;
   padding-left: 1.5rem;
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #f0e6ff 25%,
+    #dcc6ff 50%,
+    #f0e6ff 75%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gradientShift 8s linear infinite;
+  animation-delay: 0.5s;
+  display: inline-block;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
+  font-weight: 500;
 }
 
 .about-text::before {
@@ -464,6 +484,76 @@ body {
   width: 3px;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+.about-content p:hover .about-text {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #f5edff 25%,
+    #e6d4ff 50%,
+    #f5edff 75%,
+    #ffffff 100%
+  );
+}
+
+/* X accounts section in about box */
+.about-x-accounts {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.about-x-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  text-decoration: none;
+  font-family: var(--font-orbitron);
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.about-x-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.about-x-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.about-x-username {
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #f0e6ff 25%,
+    #dcc6ff 50%,
+    #f0e6ff 75%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gradientShift 8s linear infinite;
+  animation-delay: 0.5s;
+  display: inline-block;
+  font-weight: 500;
 }
 
 /* Fade in animation for sections */

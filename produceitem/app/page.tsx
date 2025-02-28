@@ -226,22 +226,50 @@ export default function Home() {
             <h1 className="title">about us</h1>
             <div className="about-content">
               <div className="about-item">
-                <span className="about-emoji">🌱</span>
                 <span className="about-text">
                   produce item - a couple of devs making fresh projects.
                 </span>
               </div>
               <div className="about-item">
-                <span className="about-emoji">🌿</span>
                 <span className="about-text">
                   founded in 2025 -  we want to start off running, deploying fun apps for all users. 
                 </span>
               </div>
               <div className="about-item">
-                <span className="about-emoji">🌞</span>
                 <span className="about-text">
                    driven off of fun - creating apps that inspire and entertain.
                 </span>
+              </div>
+              
+              {/* X account links section */}
+              <div className="about-x-accounts">
+                <a 
+                  href="https://twitter.com/konalol_" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="about-x-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleTwitterClick('https://twitter.com/konalol_');
+                  }}
+                >
+                  <span className="about-x-icon">𝕏</span>
+                  <span className="about-x-username">@konalol_</span>
+                </a>
+                
+                <a 
+                  href="https://twitter.com/ChocolateAura" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="about-x-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleTwitterClick('https://twitter.com/ChocolateAura');
+                  }}
+                >
+                  <span className="about-x-icon">𝕏</span>
+                  <span className="about-x-username">@ChocolateAura</span>
+                </a>
               </div>
             </div>
           </div>

@@ -21,7 +21,8 @@ export default function Home() {
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * produceEmojis.length);
     setRandomEmoji(produceEmojis[randomIndex]);
-  }, [produceEmojis]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
   // Function to get a new random emoji different from the current one
   const getNewRandomEmoji = () => {
@@ -228,8 +229,7 @@ export default function Home() {
               <p>
                 <span className="about-emoji">🌱</span>
                 <span className="about-text">
-                  Produce Item is a creative studio specializing in digital experiences that feel fresh, 
-                  organic, and nourishing. We believe in cultivating ideas that grow into meaningful projects.
+                  
                 </span>
               </p>
               <p>

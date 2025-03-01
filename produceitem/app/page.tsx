@@ -1,7 +1,6 @@
 "use client";
 import { useRef, useState, useEffect, useMemo } from "react";
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 
 export default function Home() {
   const [isHovering, setIsHovering] = useState(false);

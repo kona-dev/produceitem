@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState, useEffect, useMemo } from "react";
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 export default function Home() {
   const [isHovering, setIsHovering] = useState(false);
@@ -291,7 +292,7 @@ export default function Home() {
           <ul className="navList">
             <li>
               <Link 
-                href="/" 
+                href="#home" 
                 className={activeSection === 'home' ? 'active' : ''}
                 onClick={(e) => handleNavClick('home', e)}
               >
@@ -300,7 +301,7 @@ export default function Home() {
             </li>
             <li>
               <Link 
-                href="/projects" 
+                href="#projects"
                 className={activeSection === 'projects' ? 'active' : ''}
                 onClick={(e) => handleNavClick('projects', e)}
               >
@@ -309,7 +310,7 @@ export default function Home() {
             </li>
             <li>
               <Link 
-                href="/about" 
+                href="#about"
                 className={activeSection === 'about' ? 'active' : ''}
                 onClick={(e) => handleNavClick('about', e)}
               >

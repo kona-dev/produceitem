@@ -2,6 +2,8 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import Link from 'next/link';
 
+//hello world
+
 export default function Home() {
   const [isHovering, setIsHovering] = useState(false);
   const [activeSection, setActiveSection] = useState("home");

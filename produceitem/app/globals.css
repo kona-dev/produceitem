@@ -134,7 +134,9 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 10;
-  padding: 0 1rem;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
   text-align: center;
   overflow: visible;
   position: relative;
@@ -143,12 +145,15 @@ body {
 /* Section container for transitions */
 .section-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 90vw;
+  margin: 0 auto;
   transition: opacity var(--transition-speed) ease-in-out, 
               transform var(--transition-speed) ease-in-out;
   opacity: 1;
+  justify-content: center;
   transform: translateY(0);
   animation: fadeIn var(--transition-speed) ease-in-out;
+  overflow: visible;
 }
 
 /* Title */
@@ -191,15 +196,14 @@ body {
   font-size: min(18rem, 25vh);  /* Use the smaller of 18rem or 25vh */
   animation: swing 3s ease-in-out infinite;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 
-               0 0 40px rgba(255, 255, 255, 0.4),
-               0 0 60px rgba(255, 217, 0, 0.3),
-               0 0 80px rgba(255, 217, 0, 0.2);
+               0 0 40px rgba(255, 217, 0, 0.3);
   line-height: 0.9;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
   user-select: none;
   position: absolute;
   z-index: 2;
+  will-change: opacity, transform;
 }
 
 /* Remove the invisible hover area that was too wide */
@@ -210,12 +214,9 @@ body {
 /* Produce emoji hover effect - dissolve animation */
 .produce-emoji.dissolving {
   opacity: 0;
-  transform: scale(0.9);
-  filter: blur(10px);
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 
-               0 0 60px rgba(255, 255, 255, 0.6),
-               0 0 90px rgba(255, 217, 0, 0.5),
-               0 0 120px rgba(255, 217, 0, 0.4);
+  transform: scale(0.95);
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.7),
+               0 0 60px rgba(255, 217, 0, 0.4);
 }
 
 /* Keep the emoji invisible while changing */
@@ -237,28 +238,56 @@ body {
 /* Section content styling */
 .section-content {
   padding: 2rem;
-  max-width: 1000px;
+  max-width: 90vw;
+  width: 100%;
   margin: 0 auto;
   animation: fadeIn var(--transition-speed) ease-in-out;
 }
 
 /* Projects section styling */
 .projects-section {
+  position: relative;
   width: 100%;
+  max-width: 100vw;
+  overflow: visible;
+  padding-bottom: 20px;
+  display: block;
+  text-align: center;
 }
 
+/* Updated projects grid to center items initially */
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1rem 0.5rem 2rem 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  margin: 2rem auto 0;
+  scroll-snap-type: x mandatory;
 }
 
+/* Make cards snap properly */
 .project-card {
+  scroll-snap-align: center;
+  flex: 0 0 auto;
+  width: 320px;
+  max-width: 85vw;
+  height: auto;
+  min-height: 220px;
+  margin: 0 5px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 15px;
-  padding: 2rem;
+  padding: 2rem 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -271,15 +300,15 @@ body {
 }
 
 .project-emoji {
-  font-size: 4rem;
+  font-size: 4.5rem;
   margin-bottom: 1rem;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .project-card h3 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
   font-family: var(--font-orbitron);
-  margin-bottom: 0.5rem;
-  font-size: 1.8rem;
   letter-spacing: 0.05em;
   font-weight: 700;
 }
@@ -614,6 +643,23 @@ body {
   display: inline-block; /* Needed for the gradient to work properly */
 }
 
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+
+  backdrop-filter: blur(5px); /* Optional: adds a blur effect behind the footer */
+  padding: 10px 0;
+}
+
+/* Add padding to the bottom of the main content to prevent content from being hidden behind the footer */
+.main {
+  padding-bottom: 60px; /* Adjust this value based on your footer's height */
+  overflow: visible;
+}
+
 /* Gradient shift animation */
 @keyframes gradientShift {
   0% { background-position: 0% center; }
@@ -624,7 +670,7 @@ body {
 .hover-section {
   position: absolute;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
   border-radius: 15px;
   padding: min(3rem, 6vw) min(4rem, 7vw) min(2rem, 4vw);
   width: min(550px, 80vw);
@@ -644,6 +690,7 @@ body {
   pointer-events: auto !important;
   box-sizing: border-box;
   overflow: visible;
+  will-change: opacity, transform;
 }
 
 .hover-section.visible {
@@ -873,4 +920,125 @@ body {
 /* Ensure the project card hover effects still work properly */
 .card-link .project-card {
   height: 100%;
+}
+
+/* Position the Ko-fi button above the footer */
+.kofi-container {
+  position: fixed;
+  bottom: 60px; /* Adjust based on your footer height */
+  right: 20px;
+  z-index: 10;
+}
+
+.kofi-button {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  font-family: var(--font-orbitron);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.kofi-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+  .kofi-container {
+    right: 10px;
+    bottom: 50px;
+  }
+  
+  .kofi-button {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Add this to your CSS file for the icy domain styling */
+.project-title-domain-ice {
+  background: linear-gradient(
+    to right,
+    #a5f3fc 0%,
+    #7dd3fc 30%,
+    #38bdf8 60%,
+    #0ea5e9 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 400;
+  margin-left: 2px;
+  display: inline-block;
+}
+
+/* Make sure you have the existing domain styling classes */
+.project-title-main {
+  font-weight: 600;
+}
+
+/* Add better scrollbar visibility on hover */
+.projects-grid:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Ensure the title is properly styled */
+.projects-section .title {
+  margin-bottom: 0.5rem;
+  display: block;
+  text-align: center;
+}
+
+/* Creative gradient for mindCanvas.xyz */
+.project-title-domain-creative {
+  background: linear-gradient(
+    to right,
+    #f472b6 0%,
+    #ec4899 30%,
+    #db2777 60%,
+    #be185d 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 400;
+  margin-left: 2px;
+  display: inline-block;
+  animation: gradientShift 8s linear infinite;
+  animation-delay: 0.5s;
+}
+
+/* Special styling for the "more coming soon" card */
+.project-card:last-child .project-emoji {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Make the "more coming soon" card slightly different */
+.project-card:last-child {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.project-card:last-child:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
 }

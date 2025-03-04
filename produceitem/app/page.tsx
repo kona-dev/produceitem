@@ -46,24 +46,29 @@ export default function Home() {
       changeEmojiTimeoutRef.current = null;
     }
     
-    setIsHovering(true);
+    // Use requestAnimationFrame for smoother state updates
+    requestAnimationFrame(() => {
+      setIsHovering(true);
+    });
   };
   
   const handleMouseLeave = () => {
-    // Add a delay before closing the hover section
+    // Use requestAnimationFrame for smoother animations
     timeoutRef.current = setTimeout(() => {
-      setIsHovering(false);
-      
-      // Set a flag that we're in the process of changing the emoji
-      setIsChangingEmoji(true);
-      
-      // Change the emoji when it's fully dissolved (after 500ms of transition)
-      changeEmojiTimeoutRef.current = setTimeout(() => {
-        setRandomEmoji(getNewRandomEmoji());
-        setIsChangingEmoji(false);
-      }, 500); // Match this to the CSS transition duration
-      
-    }, 500); // 500ms delay before starting to close
+      requestAnimationFrame(() => {
+        setIsHovering(false);
+        
+        // Delay the emoji change until after transition completes
+        changeEmojiTimeoutRef.current = setTimeout(() => {
+          requestAnimationFrame(() => {
+            setRandomEmoji(getNewRandomEmoji());
+            setIsChangingEmoji(false);
+          });
+        }, 500);
+        
+        setIsChangingEmoji(true);
+      });
+    }, 300); // Slightly faster transition out
   };
   
   const handleTwitterClick = (url: string) => {
@@ -93,6 +98,25 @@ export default function Home() {
       }
     };
   }, []);
+  
+  // Add this useEffect after your other useEffects
+  useEffect(() => {
+    // Center the projects grid when the projects section becomes active
+    if (activeSection === 'projects') {
+      setTimeout(() => {
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (projectsGrid) {
+          // Calculate the scroll position to center the content
+          const scrollableWidth = projectsGrid.scrollWidth;
+          const visibleWidth = projectsGrid.clientWidth;
+          const scrollLeft = (scrollableWidth - visibleWidth) / 2;
+          
+          // Set the scroll position
+          projectsGrid.scrollLeft = scrollLeft;
+        }
+      }, 100); // Small delay to ensure the DOM is updated
+    }
+  }, [activeSection]);
   
   // Render the appropriate section content
   const renderSectionContent = () => {
@@ -159,6 +183,46 @@ export default function Home() {
             <h1 className="title">projects</h1>
             <div className="projects-grid">
               <div 
+                className="project-card"
+                onClick={() => handleProjectClick('https://feetdle.xyz')}
+                style={{ cursor: 'pointer' }}
+                role="button"
+                tabIndex={0}
+                aria-label="Feetdle project"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleProjectClick('https://feetdle.xyz');
+                  }
+                }}
+              >
+                <div className="project-emoji">🦶</div>
+                <h3>
+                  <span className="project-title-main">feetdle</span>
+                  <span className="project-title-domain-gold">.xyz</span>
+                </h3>
+                <p>we aren&apos;t freaks, <br/> but we satisfied the people who are.</p>
+              </div>
+              <div 
+                className="project-card"
+                onClick={() => handleProjectClick('https://dont-tilt.xyz')}
+                style={{ cursor: 'pointer' }}
+                role="button"
+                tabIndex={0}
+                aria-label="Don't Tilt project"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleProjectClick('https://dont-tilt.xyz');
+                  }
+                }}
+              >
+                <div className="project-emoji">❄️</div>
+                <h3>
+                  <span className="project-title-main">dont-tilt</span>
+                  <span className="project-title-domain-ice">.xyz</span>
+                </h3>
+                <p>take a break from your frustrating games <br/> and cool down.</p>
+              </div>
+              <div 
                 className="project-card" 
                 onClick={() => handleProjectClick('')}
                 style={{ cursor: 'pointer' }}
@@ -200,23 +264,15 @@ export default function Home() {
               </div>
               <div 
                 className="project-card"
-                onClick={() => handleProjectClick('https://feetdle.xyz')}
-                style={{ cursor: 'pointer' }}
-                role="button"
-                tabIndex={0}
-                aria-label="Feetdle project"
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    handleProjectClick('https://feetdle.xyz');
-                  }
-                }}
+                style={{ cursor: 'default' }}
+                role="region"
+                aria-label="More projects coming soon"
               >
-                <div className="project-emoji">🦶</div>
+                <div className="project-emoji">🚀</div>
                 <h3>
-                  <span className="project-title-main">feetdle</span>
-                  <span className="project-title-domain-gold">.xyz</span>
+                  <span className="project-title-main">more projects</span>
                 </h3>
-                <p>we aren&apos;t freaks, <br/> but we satisfied the people who are. <br/> <span className="yellow-gradient-text">(coming soon)</span></p>
+                <p>we&apos;re working on many more exciting ideas!<br/> check back soon for new additions.<br/> <span className="yellow-gradient-text">stay tuned!</span></p>
               </div>
             </div>
           </div>
@@ -329,8 +385,24 @@ export default function Home() {
         </div>
       </main>
       
+      {/* Ko-fi button positioned above footer */}
+      <div className="kofi-container">
+        <a 
+          href="https://ko-fi.com/produceitem" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="kofi-button"
+          onClick={(e) => {
+            e.preventDefault();
+            window.open('https://ko-fi.com/produceitem', '_blank', 'noopener noreferrer');
+          }}
+        >
+          ☕ Buy us a coffee
+        </a>
+      </div>
+      
       {/* Footer */}
-      <footer className="footer">
+      <footer className="footer fixed-footer">
         <p>© 2025 produceitem - all rights reserved</p>
       </footer>
     </div>
